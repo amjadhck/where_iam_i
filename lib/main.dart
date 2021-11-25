@@ -1,6 +1,7 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:where_iam_i/Provider/great_places.dart';
+import 'package:where_iam_i/screens/add_place_screen.dart';
 import 'package:where_iam_i/screens/place_list_screen.dart';
 
 void main() {
@@ -10,16 +11,21 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Where Iam I',
-      theme: ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.amber),
-      home: PlacesListScreen(),
-      routes: {
-        PlacesListScreen.id: (context) => PlacesListScreen(),
-      },
+    return ChangeNotifierProvider(
+      create: (context) => GreatPlaces(),
+      child: MaterialApp(
+        title: 'Where Iam I',
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
+        ),
+        home: const PlacesListScreen(),
+        routes: {
+          PlacesListScreen.id: (context) => const PlacesListScreen(),
+          AddPlacesScreen.id: (context) => const AddPlacesScreen(),
+        },
+      ),
     );
   }
 }
