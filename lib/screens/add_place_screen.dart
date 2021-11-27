@@ -27,7 +27,8 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
   }
 
   void _selectPlace(double lat, double lng) {
-    _pickedLocation = PlaceLocation(lat, lng);
+    _pickedLocation = PlaceLocation(latitude: lat, longitute: lng);
+    // PlaceLocation(lat, lng);
   }
 
   void _savePlace() {
