@@ -39,6 +39,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
     }
     Provider.of<GreatPlaces>(context, listen: false)
         .addPlace(_titleController.text, _pickedImage!, _pickedLocation!);
+    print("add place called");
     Navigator.of(context).pop();
   }
 

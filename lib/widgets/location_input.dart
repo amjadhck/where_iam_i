@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print, unused_element
 
-import 'dart:isolate';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

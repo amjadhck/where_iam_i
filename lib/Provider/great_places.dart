@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -35,8 +37,13 @@ class GreatPlaces with ChangeNotifier {
       image: pickedImage,
     );
     _items.add(newPlace);
+    _items.forEach((element) {
+      return print(element.title);
+    });
+    print("new place added to list");
     notifyListeners();
-    DBHelper.insert('user_places', {
+    print("lisnters notified");
+    DBHelper.insert('userPlaces', {
       'id': newPlace.id,
       'title': newPlace.title,
       'image': newPlace.image.path,
@@ -44,13 +51,21 @@ class GreatPlaces with ChangeNotifier {
       'loc_lng': newPlace.location!.longitute,
       'address': newPlace.location!.address,
     });
+    print("inserted into database");
   }
 
   Future<void> fethAndSetPlaces() async {
-    final dataList = await DBHelper.getData('user_places');
-    _items = dataList
-        .map(
-          (item) => Place(
+    print("before fetching item");
+    final List<Map<String, dynamic>> dataList =
+        await DBHelper.getData('userPlaces');
+    print("getdata called");
+    print(dataList);
+    //print(_items.length);
+    print("item length printed");
+    if (dataList.isEmpty) {
+      _items = dataList.map(
+        (item) {
+          return Place(
             id: item['id'],
             title: item['title'],
             location: PlaceLocation(
@@ -58,8 +73,13 @@ class GreatPlaces with ChangeNotifier {
                 longitute: item['loc_lng'],
                 address: item['address']),
             image: File(item['image']),
-          ),
-        )
-        .toList();
+          );
+        },
+      ).toList();
+    }
+    print(_items.length);
+    notifyListeners();
+    print("fetch lisnters notified");
+    print(_items.length);
   }
 }

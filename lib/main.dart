@@ -5,7 +5,7 @@ import 'package:where_iam_i/screens/add_place_screen.dart';
 import 'package:where_iam_i/screens/place_detail_screen.dart';
 import 'package:where_iam_i/screens/place_list_screen.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
 }
 
